@@ -1,0 +1,24 @@
+\frametitle{LSPE: Least-Squares Policy Evaluation (7/9)}
+\small
+\textbf{$\lambda$-LSPE} (Bertsekas \& Ioffe, 1996): Multi-step value iteration 모방
+
+\vspace{0.2em}
+$(n-s)$-step prediction:
+\[
+\hat{V}^{(\lambda)}_{s,n}(\theta) = \theta^\top\phi_s + \sum_{q=s}^{n-1} (\gamma\lambda)^{q-s} \delta_{q+1}(\theta)
+\]
+
+Loss function:
+\[
+J_n(\hat{\theta}, \theta) = \frac{1}{n} \sum_{s=0}^{n-1} \left( \hat{\theta}^\top\phi_s - \hat{V}^{(\lambda)}_{s,n}(\theta) \right)^2
+\]
+
+Update:
+\[
+\theta_{t+1} = \theta_t + \alpha_t \left( \arg\min_{\hat{\theta}} J_{n_t}(\hat{\theta}, \theta_t) - \theta_t \right)
+\]
+
+여기서 $(n_t; t \geq 0)$는 non-decreasing integer sequence
+
+\vspace{0.2em}
+\textbf{특징:} $J_n$은 $\hat{\theta}$에 대해 quadratic $\Rightarrow$ closed form solution
